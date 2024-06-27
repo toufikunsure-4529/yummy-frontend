@@ -1,24 +1,35 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import logo from './logo.svg';
+import Header from './components/Header/Header';
+import HeroSection from './components/Herosection/HeroSection';
+import About from './components/about/About';
 
 function App() {
+  const [preloader, setPreloader] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPreloader(false)
+    }, 4000);
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {preloader ? (<div className="d-flex justify-content-center align-items-center bg-light min-vh-100">
+  <img src="/img/loading.svg" alt='preloader' />
+</div>
+) :
+        (
+          <>
+            <Header />
+            <HeroSection />
+            <About />
+            <p title='Opening'>Under Maintainence</p>
+          </>
+        )
+      }
+    </>
+
   );
 }
 
